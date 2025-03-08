@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://o2hwfnlyr7a7"]
+[gd_scene load_steps=33 format=3 uid="uid://o2hwfnlyr7a7"]
 
 [ext_resource type="Texture2D" uid="uid://lu2wuhwi0n7n" path="res://icon.svg" id="1_2wl7v"]
 [ext_resource type="Script" uid="uid://r1suvhr07any" path="res://Scripts/GroupNode.cs" id="1_124qp"]
@@ -24,6 +24,8 @@
 [ext_resource type="Texture2D" uid="uid://dpdcslh6fpc77" path="res://Assets/Dust Cloud.png" id="14_v7xhk"]
 [ext_resource type="Texture2D" uid="uid://cxotrksuuwism" path="res://Assets/Boss/Boss Laugh.png" id="15_wp4mh"]
 [ext_resource type="Texture2D" uid="uid://c6ty3bhoufiub" path="res://Assets/Boss/Boss Cheer.png" id="16_y0yaw"]
+[ext_resource type="Texture2D" uid="uid://byp0vtkv7m0v5" path="res://Assets/Podium.png" id="18_y0yaw"]
+[ext_resource type="Texture2D" uid="uid://c8njdnlkmsrcd" path="res://Assets/Stage.png" id="19_yl3ua"]
 [ext_resource type="AudioStream" uid="uid://4pyyoigk5xnb" path="res://Assets/Audio/Song.wav" id="20_pgw7i"]
 [ext_resource type="Script" uid="uid://ecbatsotxuc6" path="res://Scripts/SceneManager.cs" id="26_leul7"]
 
@@ -206,6 +208,14 @@ autoplay = true
 [node name="Controller" type="Node" parent="Game/BigBoss" node_paths=PackedStringArray("character")]
 script = ExtResource("8_7rq2r")
 character = NodePath("..")
+
+[node name="Podium" type="Sprite2D" parent="Game/BigBoss"]
+position = Vector2(-28, 16)
+texture = ExtResource("18_y0yaw")
+
+[node name="Stage" type="Sprite2D" parent="Game/BigBoss"]
+position = Vector2(-29, 8)
+texture = ExtResource("19_yl3ua")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 55
