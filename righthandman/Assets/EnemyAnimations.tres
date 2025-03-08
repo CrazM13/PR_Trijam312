@@ -1,0 +1,50 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://dpstttged73jf"]
+
+[ext_resource type="Texture2D" uid="uid://drha02phash68" path="res://Assets/Enemy/Enemy Bow.png" id="1_rinqa"]
+[ext_resource type="Texture2D" uid="uid://cwhqi2dxgx5ty" path="res://Assets/Enemy/Enemy Idle.png" id="2_xlou8"]
+[ext_resource type="Texture2D" uid="uid://b7ajl0f6jh0jr" path="res://Assets/Enemy/Enemy Clap.png" id="3_1wxn2"]
+[ext_resource type="Texture2D" uid="uid://yl2ltqjpg82s" path="res://Assets/Enemy/Enemy Laugh.png" id="4_s5ooa"]
+[ext_resource type="Texture2D" uid="uid://d3qyfebekv5cc" path="res://Assets/Enemy/Enemy Cheer.png" id="5_ldp2f"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_rinqa")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_xlou8")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_1wxn2")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_s5ooa")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_ldp2f")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]

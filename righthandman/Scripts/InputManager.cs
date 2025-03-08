@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public partial class InputManager : Control {
 
 	#region Singleton
-	public InputManager Instance { get; private set; }
+	public static InputManager Instance { get; private set; }
 
 	public override void _EnterTree() {
 		base._EnterTree();
@@ -23,6 +23,11 @@ public partial class InputManager : Control {
 	private Control currentInputNode;
 	private RandomNumberGenerator rng;
 
+	public float minAcceptableRange = 0.7f;
+	public float maxAcceptableRange = 0.9f;
+
+	public string action = "";
+
 	public float Progress { get; private set; }
 
 	// Called when the node enters the scene tree for the first time.
@@ -38,7 +43,7 @@ public partial class InputManager : Control {
 		if (currentInputNode != null) {
 			Progress += (float) delta * inputSpeed;
 
-			currentInputNode.GlobalPosition = new Vector2(Mathf.Lerp(this.GlobalPosition.X, -this.GlobalPosition.X, Progress), this.GlobalPosition.Y);
+			currentInputNode.GlobalPosition = new Vector2(Mathf.Lerp(this.GlobalPosition.X, 0, Progress), this.GlobalPosition.Y);
 		}
 
 	}
@@ -51,13 +56,22 @@ public partial class InputManager : Control {
 
 		Progress = 0;
 		PackedScene selected;
+		int selectedIndex = rng.RandiRange(0, 3);
 
-		selected = rng.RandiRange(0, 3) switch {
+		selected = selectedIndex switch {
 			0 => upInputIndicator,
 			1 => downInputIndicator,
 			2 => leftInputIndicator,
 			3 => rightInputIndicator,
 			_ => null
+		};
+
+		action = selectedIndex switch {
+			0 => "up",
+			1 => "down",
+			2 => "left",
+			3 => "right",
+			_ => ""
 		};
 
 		currentInputNode = selected.Instantiate<Control>();
@@ -66,6 +80,19 @@ public partial class InputManager : Control {
 		currentInputNode.GlobalPosition = this.GlobalPosition;
 	}
 
+	public bool IsInRange(string action) {
 
+		if (this.action != action) return false;
+
+		return IsInRange();
+	}
+
+	public bool IsInRange() {
+		return minAcceptableRange < Progress && Progress < maxAcceptableRange;
+	}
+
+	public string GetCurrentAction() {
+		return this.action;
+	}
 
 }

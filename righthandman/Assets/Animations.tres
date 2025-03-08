@@ -1,12 +1,16 @@
-[gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://b2658lx4sjw6d"]
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://b2658lx4sjw6d"]
 
-[ext_resource type="Texture2D" uid="uid://lu2wuhwi0n7n" path="res://icon.svg" id="1_abkds"]
+[ext_resource type="Texture2D" uid="uid://77xka6lr40mq" path="res://Assets/Player/Player Bow.png" id="1_6wrga"]
+[ext_resource type="Texture2D" uid="uid://dmrjtkkhdmju7" path="res://Assets/Player/Player Idle.png" id="2_1gjhj"]
+[ext_resource type="Texture2D" uid="uid://cyy4yc02jfe6e" path="res://Assets/Player/Player Clap.png" id="3_icyra"]
+[ext_resource type="Texture2D" uid="uid://bk68ukethjui" path="res://Assets/Player/Player Laugh.png" id="4_mf6fb"]
+[ext_resource type="Texture2D" uid="uid://dg0fmcimxsqlh" path="res://Assets/Player/Player Cheer.png" id="5_wbmg2"]
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_abkds")
+"texture": ExtResource("1_6wrga")
 }],
 "loop": true,
 "name": &"down",
@@ -14,7 +18,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_abkds")
+"texture": ExtResource("2_1gjhj")
 }],
 "loop": true,
 "name": &"idle",
@@ -22,7 +26,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_abkds")
+"texture": ExtResource("3_icyra")
 }],
 "loop": true,
 "name": &"left",
@@ -30,7 +34,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_abkds")
+"texture": ExtResource("4_mf6fb")
 }],
 "loop": true,
 "name": &"right",
@@ -38,7 +42,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_abkds")
+"texture": ExtResource("5_wbmg2")
 }],
 "loop": true,
 "name": &"up",

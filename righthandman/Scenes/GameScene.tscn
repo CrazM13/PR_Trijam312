@@ -1,16 +1,27 @@
-[gd_scene load_steps=10 format=3 uid="uid://o2hwfnlyr7a7"]
+[gd_scene load_steps=21 format=3 uid="uid://o2hwfnlyr7a7"]
 
 [ext_resource type="Texture2D" uid="uid://lu2wuhwi0n7n" path="res://icon.svg" id="1_2wl7v"]
+[ext_resource type="Script" uid="uid://r1suvhr07any" path="res://Scripts/GroupNode.cs" id="1_124qp"]
 [ext_resource type="SpriteFrames" uid="uid://b2658lx4sjw6d" path="res://Assets/Animations.tres" id="1_x6js8"]
+[ext_resource type="Texture2D" uid="uid://cwhqi2dxgx5ty" path="res://Assets/Enemy/Enemy Idle.png" id="1_yhlfj"]
 [ext_resource type="Script" uid="uid://b0festrb3thti" path="res://Scripts/InputManager.cs" id="2_4bvgx"]
+[ext_resource type="Script" uid="uid://c05fmgw2j711x" path="res://Scripts/Character.cs" id="2_y30xb"]
+[ext_resource type="PackedScene" uid="uid://da3wsxhd47we0" path="res://Assets/Prefabs/UpEmote.tscn" id="3_f43ej"]
 [ext_resource type="PackedScene" uid="uid://dp0teb0ed124f" path="res://Assets/Prefabs/UpInput.tscn" id="3_kilg5"]
+[ext_resource type="Script" uid="uid://4tnb0bqotdlk" path="res://Scripts/PlayerControl.cs" id="3_xhjei"]
+[ext_resource type="PackedScene" uid="uid://dijbmpey8c66n" path="res://Assets/Prefabs/DownEmote.tscn" id="4_7rq2r"]
 [ext_resource type="PackedScene" uid="uid://cnchswng0dhpl" path="res://Assets/Prefabs/DownInput.tscn" id="4_x6js8"]
+[ext_resource type="PackedScene" uid="uid://brh01hqwaj0y3" path="res://Assets/Prefabs/LeftEmote.tscn" id="5_124qp"]
 [ext_resource type="PackedScene" uid="uid://dsj7arh1lrm6k" path="res://Assets/Prefabs/LeftInput.tscn" id="5_lg2j6"]
+[ext_resource type="PackedScene" uid="uid://fkc6bvh51ip5" path="res://Assets/Prefabs/RightEmote.tscn" id="6_qolck"]
 [ext_resource type="PackedScene" uid="uid://cjpb68c0qh52g" path="res://Assets/Prefabs/RightInput.tscn" id="6_y30xb"]
+[ext_resource type="Script" uid="uid://pwbl32st40ss" path="res://Scripts/AIControls.cs" id="8_7rq2r"]
+[ext_resource type="SpriteFrames" uid="uid://dpstttged73jf" path="res://Assets/EnemyAnimations.tres" id="9_ry528"]
+[ext_resource type="Texture2D" uid="uid://d330g5g606x15" path="res://Assets/Boss/Boss Idle.png" id="11_yhlfj"]
 
 [sub_resource type="Gradient" id="Gradient_2wl7v"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.33, 0.66, 1)
+offsets = PackedFloat32Array(0, 0.1, 0.3, 1)
 colors = PackedColorArray(1, 0, 0, 1, 9.3855e-07, 0.647889, 0.168378, 1, 1, 0, 0, 1, 1, 0, 0, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_4bvgx"]
@@ -19,36 +30,106 @@ width = 500
 
 [node name="GameScene" type="Node2D"]
 
+[node name="BG" type="CanvasLayer" parent="."]
+layer = -100
+
+[node name="Parallax2D" type="Parallax2D" parent="BG"]
+scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(100, 150)
+repeat_times = 100
+
+[node name="Sprite2D" type="Sprite2D" parent="BG/Parallax2D"]
+self_modulate = Color(0.205117, 0.205117, 0.205117, 1)
+texture = ExtResource("1_yhlfj")
+
 [node name="Game" type="CanvasLayer" parent="."]
 
-[node name="Player" type="AnimatedSprite2D" parent="Game"]
-position = Vector2(86, 451)
-sprite_frames = ExtResource("1_x6js8")
-animation = &"down"
+[node name="Audience" type="Node2D" parent="Game"]
+position = Vector2(503, 440)
+script = ExtResource("1_124qp")
 
-[node name="Enemy1" type="AnimatedSprite2D" parent="Game"]
-position = Vector2(228, 451)
-sprite_frames = ExtResource("1_x6js8")
-animation = &"down"
+[node name="Enemy1" type="AnimatedSprite2D" parent="Game/Audience"]
+self_modulate = Color(0, 1, 1, 1)
+sprite_frames = ExtResource("9_ry528")
+animation = &"idle"
+autoplay = "idle"
+script = ExtResource("2_y30xb")
+emoteDuration = 2.0
+upEmote = ExtResource("3_f43ej")
+downEmote = ExtResource("4_7rq2r")
+leftEmote = ExtResource("5_124qp")
+rightEmote = ExtResource("6_qolck")
 
-[node name="Enemy2" type="AnimatedSprite2D" parent="Game"]
-position = Vector2(384, 450)
-sprite_frames = ExtResource("1_x6js8")
-animation = &"down"
+[node name="AIControls" type="Node" parent="Game/Audience/Enemy1" node_paths=PackedStringArray("character")]
+script = ExtResource("8_7rq2r")
+character = NodePath("..")
 
-[node name="Enemy3" type="AnimatedSprite2D" parent="Game"]
-position = Vector2(537, 454)
-sprite_frames = ExtResource("1_x6js8")
-animation = &"down"
+[node name="Enemy2" type="AnimatedSprite2D" parent="Game/Audience"]
+self_modulate = Color(1, 0, 1, 1)
+sprite_frames = ExtResource("9_ry528")
+animation = &"idle"
+autoplay = "idle"
+script = ExtResource("2_y30xb")
+emoteDuration = 2.0
+upEmote = ExtResource("3_f43ej")
+downEmote = ExtResource("4_7rq2r")
+leftEmote = ExtResource("5_124qp")
+rightEmote = ExtResource("6_qolck")
 
-[node name="Enemy4" type="AnimatedSprite2D" parent="Game"]
-position = Vector2(689, 451)
+[node name="AIControls" type="Node" parent="Game/Audience/Enemy2" node_paths=PackedStringArray("character")]
+script = ExtResource("8_7rq2r")
+character = NodePath("..")
+
+[node name="Enemy3" type="AnimatedSprite2D" parent="Game/Audience"]
+self_modulate = Color(1, 1, 0, 1)
+sprite_frames = ExtResource("9_ry528")
+animation = &"idle"
+autoplay = "idle"
+script = ExtResource("2_y30xb")
+emoteDuration = 2.0
+upEmote = ExtResource("3_f43ej")
+downEmote = ExtResource("4_7rq2r")
+leftEmote = ExtResource("5_124qp")
+rightEmote = ExtResource("6_qolck")
+
+[node name="AIControls" type="Node" parent="Game/Audience/Enemy3" node_paths=PackedStringArray("character")]
+script = ExtResource("8_7rq2r")
+character = NodePath("..")
+
+[node name="Enemy4" type="AnimatedSprite2D" parent="Game/Audience"]
+self_modulate = Color(0.415686, 0.454902, 0.462745, 1)
+sprite_frames = ExtResource("9_ry528")
+animation = &"idle"
+autoplay = "idle"
+script = ExtResource("2_y30xb")
+emoteDuration = 2.0
+upEmote = ExtResource("3_f43ej")
+downEmote = ExtResource("4_7rq2r")
+leftEmote = ExtResource("5_124qp")
+rightEmote = ExtResource("6_qolck")
+
+[node name="AIControls" type="Node" parent="Game/Audience/Enemy4" node_paths=PackedStringArray("character")]
+script = ExtResource("8_7rq2r")
+character = NodePath("..")
+
+[node name="Player" type="AnimatedSprite2D" parent="Game/Audience"]
 sprite_frames = ExtResource("1_x6js8")
-animation = &"down"
+animation = &"idle"
+autoplay = "idle"
+script = ExtResource("2_y30xb")
+emoteDuration = 2.0
+upEmote = ExtResource("3_f43ej")
+downEmote = ExtResource("4_7rq2r")
+leftEmote = ExtResource("5_124qp")
+rightEmote = ExtResource("6_qolck")
+
+[node name="PlayerControls" type="Node" parent="Game/Audience/Player" node_paths=PackedStringArray("player")]
+script = ExtResource("3_xhjei")
+player = NodePath("..")
 
 [node name="BigBoss" type="Sprite2D" parent="Game"]
-position = Vector2(1109, 454)
-texture = ExtResource("1_2wl7v")
+position = Vector2(1189, 376)
+texture = ExtResource("11_yhlfj")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 55
@@ -57,44 +138,50 @@ layer = 55
 layer = 55
 
 [node name="ColorRect" type="TextureRect" parent="TopLevelHUD"]
-custom_minimum_size = Vector2(0, 100)
-anchors_preset = 14
-anchor_top = 0.5
+custom_minimum_size = Vector2(0, 170)
+anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_top = 210.0
-offset_bottom = 310.0
+anchor_bottom = 1.0
+offset_top = -186.0
+offset_bottom = -16.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 texture = SubResource("GradientTexture1D_4bvgx")
 
 [node name="ImputManager" type="Control" parent="TopLevelHUD/ColorRect"]
+custom_minimum_size = Vector2(128, 128)
 layout_mode = 1
-anchors_preset = 1
+anchors_preset = 6
 anchor_left = 1.0
+anchor_top = 0.5
 anchor_right = 1.0
-offset_left = 31.0
-offset_top = -10.0
-offset_right = 71.0
-offset_bottom = 30.0
+anchor_bottom = 0.5
+offset_top = -64.0
+offset_right = 128.0
+offset_bottom = 64.0
 grow_horizontal = 0
+grow_vertical = 2
 script = ExtResource("2_4bvgx")
 upInputIndicator = ExtResource("3_kilg5")
 downInputIndicator = ExtResource("4_x6js8")
 leftInputIndicator = ExtResource("5_lg2j6")
 rightInputIndicator = ExtResource("6_y30xb")
-inputSpeed = 0.25
+inputSpeed = 0.5
 
 [node name="Timer" type="Timer" parent="TopLevelHUD/ColorRect/ImputManager"]
 wait_time = 3.0
 autostart = true
 
 [node name="NinePatchRect" type="NinePatchRect" parent="TopLevelHUD/ColorRect"]
-custom_minimum_size = Vector2(128, 128)
+custom_minimum_size = Vector2(128, 200)
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 14
+anchor_top = 0.5
 anchor_right = 1.0
-anchor_bottom = 1.0
+anchor_bottom = 0.5
+offset_top = -16.0
+offset_bottom = 16.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_2wl7v")
@@ -104,4 +191,9 @@ patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
 
+[connection signal="FailInput" from="Game/Audience/Enemy1" to="Game/Audience" method="Derank"]
+[connection signal="FailInput" from="Game/Audience/Enemy2" to="Game/Audience" method="Derank"]
+[connection signal="FailInput" from="Game/Audience/Enemy3" to="Game/Audience" method="Derank"]
+[connection signal="FailInput" from="Game/Audience/Enemy4" to="Game/Audience" method="Derank"]
+[connection signal="FailInput" from="Game/Audience/Player" to="Game/Audience" method="Derank"]
 [connection signal="timeout" from="TopLevelHUD/ColorRect/ImputManager/Timer" to="TopLevelHUD/ColorRect/ImputManager" method="SpawnInput"]

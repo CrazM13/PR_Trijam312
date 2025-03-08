@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://da3wsxhd47we0"]
+
+[ext_resource type="Texture2D" uid="uid://bt56qwpvfdl2x" path="res://Assets/Emotes/Emote Cheer.png" id="1_rl104"]
+[ext_resource type="Script" uid="uid://dn1f2jefwep8o" path="res://Scripts/Emote.cs" id="2_4mml4"]
+
+[node name="UpEmote" type="Sprite2D"]
+texture = ExtResource("1_rl104")
+script = ExtResource("2_4mml4")
