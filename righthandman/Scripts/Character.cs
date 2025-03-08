@@ -38,10 +38,12 @@ public partial class Character : AnimatedSprite2D {
 			_ => null
 		};
 
-		Node2D node = selected.Instantiate<Node2D>();
+		if (selected != null) {
+			Node2D node = selected.Instantiate<Node2D>();
 
-		AddChild(node);
-		node.GlobalPosition = this.GlobalPosition;
+			AddChild(node);
+			node.GlobalPosition = this.GlobalPosition;
+		}
 	}
 
 	public void SendFailure() {

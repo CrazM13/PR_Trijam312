@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://o2hwfnlyr7a7"]
+[gd_scene load_steps=31 format=3 uid="uid://o2hwfnlyr7a7"]
 
 [ext_resource type="Texture2D" uid="uid://lu2wuhwi0n7n" path="res://icon.svg" id="1_2wl7v"]
 [ext_resource type="Script" uid="uid://r1suvhr07any" path="res://Scripts/GroupNode.cs" id="1_124qp"]
@@ -18,9 +18,57 @@
 [ext_resource type="Script" uid="uid://pwbl32st40ss" path="res://Scripts/AIControls.cs" id="8_7rq2r"]
 [ext_resource type="SpriteFrames" uid="uid://dpstttged73jf" path="res://Assets/EnemyAnimations.tres" id="9_ry528"]
 [ext_resource type="Texture2D" uid="uid://d330g5g606x15" path="res://Assets/Boss/Boss Idle.png" id="11_yhlfj"]
+[ext_resource type="Texture2D" uid="uid://cqke3m8omp7ga" path="res://Assets/Boss/Boss Bow.png" id="12_4v654"]
 [ext_resource type="AudioStream" uid="uid://tdsqqik3cdb" path="res://Assets/Audio/Speech.wav" id="13_gipt1"]
+[ext_resource type="Texture2D" uid="uid://dpeau3gcu1pcy" path="res://Assets/Boss/Boss Clap.png" id="14_leul7"]
 [ext_resource type="Texture2D" uid="uid://dpdcslh6fpc77" path="res://Assets/Dust Cloud.png" id="14_v7xhk"]
+[ext_resource type="Texture2D" uid="uid://cxotrksuuwism" path="res://Assets/Boss/Boss Laugh.png" id="15_wp4mh"]
+[ext_resource type="Texture2D" uid="uid://c6ty3bhoufiub" path="res://Assets/Boss/Boss Cheer.png" id="16_y0yaw"]
 [ext_resource type="AudioStream" uid="uid://4pyyoigk5xnb" path="res://Assets/Audio/Song.wav" id="20_pgw7i"]
+[ext_resource type="Script" uid="uid://ecbatsotxuc6" path="res://Scripts/SceneManager.cs" id="26_leul7"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yl3ua"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_4v654")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_yhlfj")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_leul7")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_wp4mh")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_y0yaw")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pgw7i"]
 particle_flag_disable_z = true
@@ -57,10 +105,11 @@ texture = ExtResource("1_yhlfj")
 
 [node name="Game" type="CanvasLayer" parent="."]
 
-[node name="Audience" type="Node2D" parent="Game" node_paths=PackedStringArray("particles")]
+[node name="Audience" type="Node2D" parent="Game" node_paths=PackedStringArray("particles", "sceneManager")]
 position = Vector2(503, 440)
 script = ExtResource("1_124qp")
 particles = NodePath("../../HUD/GPUParticles2D")
+sceneManager = NodePath("../../SceneManager")
 
 [node name="Enemy1" type="AnimatedSprite2D" parent="Game/Audience"]
 self_modulate = Color(0, 1, 1, 1)
@@ -137,17 +186,26 @@ downEmote = ExtResource("4_7rq2r")
 leftEmote = ExtResource("5_124qp")
 rightEmote = ExtResource("6_qolck")
 
-[node name="PlayerControls" type="Node" parent="Game/Audience/Player" node_paths=PackedStringArray("player")]
+[node name="PlayerControls" type="Node" parent="Game/Audience/Player" node_paths=PackedStringArray("player", "sceneManager")]
 script = ExtResource("3_xhjei")
 player = NodePath("..")
+sceneManager = NodePath("../../../../SceneManager")
 
-[node name="BigBoss" type="Sprite2D" parent="Game"]
+[node name="BigBoss" type="AnimatedSprite2D" parent="Game"]
 position = Vector2(1189, 376)
-texture = ExtResource("11_yhlfj")
+sprite_frames = SubResource("SpriteFrames_yl3ua")
+animation = &"idle"
+autoplay = "idle"
+flip_h = true
+script = ExtResource("2_y30xb")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Game/BigBoss"]
 stream = ExtResource("13_gipt1")
 autoplay = true
+
+[node name="Controller" type="Node" parent="Game/BigBoss" node_paths=PackedStringArray("character")]
+script = ExtResource("8_7rq2r")
+character = NodePath("..")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 55
@@ -222,6 +280,9 @@ patch_margin_bottom = 16
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("20_pgw7i")
 autoplay = true
+
+[node name="SceneManager" type="Node" parent="."]
+script = ExtResource("26_leul7")
 
 [connection signal="FailInput" from="Game/Audience/Enemy1" to="Game/Audience" method="Derank"]
 [connection signal="FailInput" from="Game/Audience/Enemy2" to="Game/Audience" method="Derank"]

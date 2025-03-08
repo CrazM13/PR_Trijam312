@@ -4,9 +4,12 @@ using System;
 public partial class PlayerControl : Node {
 
 	[Export] private Character player;
+	[Export] private SceneManager sceneManager;
 
 	private bool hasActed = false;
 	private bool wasInRange = false;
+
+	private int remainingLives = 3;
 
 	public override void _Process(double delta) {
 
@@ -15,6 +18,7 @@ public partial class PlayerControl : Node {
 
 			if (!InputManager.Instance.IsInRange("up")) {
 				player.SendFailure();
+				remainingLives--;
 			}
 
 			hasActed = true;
@@ -25,6 +29,7 @@ public partial class PlayerControl : Node {
 
 			if (!InputManager.Instance.IsInRange("down")) {
 				player.SendFailure();
+				remainingLives--;
 			}
 
 			hasActed = true;
@@ -35,6 +40,7 @@ public partial class PlayerControl : Node {
 
 			if (!InputManager.Instance.IsInRange("left")) {
 				player.SendFailure();
+				remainingLives--;
 			}
 
 			hasActed = true;
@@ -45,9 +51,14 @@ public partial class PlayerControl : Node {
 
 			if (!InputManager.Instance.IsInRange("right")) {
 				player.SendFailure();
+				remainingLives--;
 			}
 
 			hasActed = true;
+
+			if (remainingLives <= 0) {
+				sceneManager.LoadScene("res://Scenes/LoseScene.tscn");
+			}
 		}
 
 		bool isInRange = InputManager.Instance.IsInRange();

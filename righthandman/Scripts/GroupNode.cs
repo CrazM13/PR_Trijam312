@@ -4,6 +4,7 @@ using System;
 public partial class GroupNode : Node2D {
 
 	[Export] private GpuParticles2D particles;
+	[Export] private SceneManager sceneManager;
 
 
 	// Called when the node enters the scene tree for the first time.
@@ -30,7 +31,11 @@ public partial class GroupNode : Node2D {
 		particles.Emitting = true;
 
 		GetTree().CreateTimer(1f).Timeout += () => {
-			if (IsInstanceValid(this)) SortChildren();
+			SortChildren();
+
+			if (GetChild(0).Name == "Player") {
+				sceneManager.LoadScene("res://Scenes/WinScene.tscn");
+			}
 		};
 		
 	}
