@@ -6,3 +6,6 @@
 [node name="UpEmote" type="Sprite2D"]
 texture = ExtResource("1_xf084")
 script = ExtResource("2_nvp7y")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -22.0

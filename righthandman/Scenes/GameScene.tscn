@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://o2hwfnlyr7a7"]
+[gd_scene load_steps=23 format=3 uid="uid://o2hwfnlyr7a7"]
 
 [ext_resource type="Texture2D" uid="uid://lu2wuhwi0n7n" path="res://icon.svg" id="1_2wl7v"]
 [ext_resource type="Script" uid="uid://r1suvhr07any" path="res://Scripts/GroupNode.cs" id="1_124qp"]
@@ -18,6 +18,8 @@
 [ext_resource type="Script" uid="uid://pwbl32st40ss" path="res://Scripts/AIControls.cs" id="8_7rq2r"]
 [ext_resource type="SpriteFrames" uid="uid://dpstttged73jf" path="res://Assets/EnemyAnimations.tres" id="9_ry528"]
 [ext_resource type="Texture2D" uid="uid://d330g5g606x15" path="res://Assets/Boss/Boss Idle.png" id="11_yhlfj"]
+[ext_resource type="AudioStream" uid="uid://tdsqqik3cdb" path="res://Assets/Audio/Speech.wav" id="13_gipt1"]
+[ext_resource type="AudioStream" uid="uid://4pyyoigk5xnb" path="res://Assets/Audio/Song.wav" id="20_pgw7i"]
 
 [sub_resource type="Gradient" id="Gradient_2wl7v"]
 interpolation_mode = 1
@@ -131,6 +133,10 @@ player = NodePath("..")
 position = Vector2(1189, 376)
 texture = ExtResource("11_yhlfj")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Game/BigBoss"]
+stream = ExtResource("13_gipt1")
+autoplay = true
+
 [node name="HUD" type="CanvasLayer" parent="."]
 layer = 55
 
@@ -191,9 +197,15 @@ patch_margin_top = 16
 patch_margin_right = 16
 patch_margin_bottom = 16
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_pgw7i")
+autoplay = true
+
 [connection signal="FailInput" from="Game/Audience/Enemy1" to="Game/Audience" method="Derank"]
 [connection signal="FailInput" from="Game/Audience/Enemy2" to="Game/Audience" method="Derank"]
 [connection signal="FailInput" from="Game/Audience/Enemy3" to="Game/Audience" method="Derank"]
 [connection signal="FailInput" from="Game/Audience/Enemy4" to="Game/Audience" method="Derank"]
 [connection signal="FailInput" from="Game/Audience/Player" to="Game/Audience" method="Derank"]
+[connection signal="finished" from="Game/BigBoss/AudioStreamPlayer" to="Game/BigBoss/AudioStreamPlayer" method="play" binds= [0.0]]
 [connection signal="timeout" from="TopLevelHUD/ColorRect/ImputManager/Timer" to="TopLevelHUD/ColorRect/ImputManager" method="SpawnInput"]
+[connection signal="finished" from="AudioStreamPlayer" to="AudioStreamPlayer" method="play" binds= [0.0]]
