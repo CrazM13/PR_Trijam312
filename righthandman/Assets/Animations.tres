@@ -1,0 +1,46 @@
+[gd_resource type="SpriteFrames" load_steps=2 format=3 uid="uid://b2658lx4sjw6d"]
+
+[ext_resource type="Texture2D" uid="uid://lu2wuhwi0n7n" path="res://icon.svg" id="1_abkds"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_abkds")
+}],
+"loop": true,
+"name": &"down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_abkds")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_abkds")
+}],
+"loop": true,
+"name": &"left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_abkds")
+}],
+"loop": true,
+"name": &"right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_abkds")
+}],
+"loop": true,
+"name": &"up",
+"speed": 5.0
+}]
