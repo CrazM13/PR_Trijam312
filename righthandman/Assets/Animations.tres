@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://77xka6lr40mq" path="res://Assets/Player/Player Bow.png" id="1_6wrga"]
 [ext_resource type="Texture2D" uid="uid://dmrjtkkhdmju7" path="res://Assets/Player/Player Idle.png" id="2_1gjhj"]
 [ext_resource type="Texture2D" uid="uid://cyy4yc02jfe6e" path="res://Assets/Player/Player Clap.png" id="3_icyra"]
-[ext_resource type="Texture2D" uid="uid://bk68ukethjui" path="res://Assets/Player/Player Laugh.png" id="4_mf6fb"]
+[ext_resource type="Texture2D" uid="uid://byc1p76ve83wl" path="res://Assets/Player/Player Laugh Alt.png" id="4_6wrga"]
 [ext_resource type="Texture2D" uid="uid://dg0fmcimxsqlh" path="res://Assets/Player/Player Cheer.png" id="5_wbmg2"]
 
 [resource]
@@ -34,7 +34,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_mf6fb")
+"texture": ExtResource("4_6wrga")
 }],
 "loop": true,
 "name": &"right",

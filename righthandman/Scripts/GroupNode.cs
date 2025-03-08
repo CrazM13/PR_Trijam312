@@ -3,6 +3,8 @@ using System;
 
 public partial class GroupNode : Node2D {
 
+	[Export] private GpuParticles2D particles;
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready() {
@@ -25,7 +27,12 @@ public partial class GroupNode : Node2D {
 		this.RemoveChild(node);
 		this.AddChild(node);
 
-		SortChildren();
+		particles.Emitting = true;
+
+		GetTree().CreateTimer(1f).Timeout += () => {
+			if (IsInstanceValid(this)) SortChildren();
+		};
+		
 	}
 
 }

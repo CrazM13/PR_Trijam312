@@ -5,6 +5,9 @@ public partial class PlayerControl : Node {
 
 	[Export] private Character player;
 
+	private bool hasActed = false;
+	private bool wasInRange = false;
+
 	public override void _Process(double delta) {
 
 		if (Input.IsActionJustPressed("ui_up")) {
@@ -13,6 +16,8 @@ public partial class PlayerControl : Node {
 			if (!InputManager.Instance.IsInRange("up")) {
 				player.SendFailure();
 			}
+
+			hasActed = true;
 		}
 
 		if (Input.IsActionJustPressed("ui_down")) {
@@ -21,6 +26,8 @@ public partial class PlayerControl : Node {
 			if (!InputManager.Instance.IsInRange("down")) {
 				player.SendFailure();
 			}
+
+			hasActed = true;
 		}
 
 		if (Input.IsActionJustPressed("ui_left")) {
@@ -29,6 +36,8 @@ public partial class PlayerControl : Node {
 			if (!InputManager.Instance.IsInRange("left")) {
 				player.SendFailure();
 			}
+
+			hasActed = true;
 		}
 
 		if (Input.IsActionJustPressed("ui_right")) {
@@ -37,7 +46,21 @@ public partial class PlayerControl : Node {
 			if (!InputManager.Instance.IsInRange("right")) {
 				player.SendFailure();
 			}
+
+			hasActed = true;
 		}
+
+		bool isInRange = InputManager.Instance.IsInRange();
+
+		if (!isInRange && wasInRange) {
+			if (!hasActed) {
+				player.SendFailure();
+			}
+
+			hasActed = false;
+		}
+
+		wasInRange = isInRange;
 
 	}
 }
