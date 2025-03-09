@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bb67ts3nb3pqw"]
+[gd_scene load_steps=4 format=3 uid="uid://bb67ts3nb3pqw"]
 
 [ext_resource type="Script" uid="uid://ecbatsotxuc6" path="res://Scripts/SceneManager.cs" id="1_ntd6c"]
+[ext_resource type="Texture2D" uid="uid://84vd70fpkhq" path="res://Assets/Win.png" id="1_raalc"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_raalc"]
 font_size = 52
@@ -12,6 +13,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_raalc")
+expand_mode = 2
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1

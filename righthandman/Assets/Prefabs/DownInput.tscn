@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cnchswng0dhpl"]
 
-[ext_resource type="Texture2D" uid="uid://lu2wuhwi0n7n" path="res://icon.svg" id="1_tfe02"]
+[ext_resource type="Texture2D" uid="uid://cm2cs4ghppssb" path="res://Assets/Arrow.png" id="1_tfe02"]
 
 [node name="UpInput" type="Control"]
 layout_mode = 3
